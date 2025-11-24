@@ -1,0 +1,164 @@
+
+:linkcss:
+:stylesdir: css
+:stylesheet: mystyle.css
+:twoinches: width='360'
+:full-width: width='100%'
+:three-quarters-width: width='75%'
+:two-thirds-width: width='66%'
+:half-width: width='50%'
+:half-size:
+:one-thirds-width: width='33%'
+:one-quarters-width: width='25%'
+:thumbnail: width='60'
+:imagesdir: images
+:sourcesdir: codes
+:icons: font
+:hide-uri-scheme!:
+:figure-caption: 図
+:example-caption: リスト
+:table-caption: 表
+:appendix-caption: 付録
+:xrefstyle: short
+:section-refsig:
+:chapter-refsig:
+
+= lox01
+
+[.lead]
+Java版Loxを作るための演習用リポジトリです。
+
+== ディレクトリを確認する
+
+このAssignmentをCloneしたら、次のことを確認しなさい。
+
+- [ ] `codes` ディレクトリがあることを確認する。
+- [ ] `css` ディレクトリがあることを確認する。
+- [ ] `images` ディレクトリがあることを確認する。
+
+上記ディレクトリが確認できたら、テキストエディタでREADME.adoc を編集します。
+
+[source, asciidoctor]
+----
+// 確認チェック前のテキスト
+- [ ] `codes` ディレクトリがあることを確認する。
+
+// 確認チェック後のテキスト
+- [x] `codes` ディレクトリがあることを確認する。
+----
+
+ここで一度コミットして、作業履歴を残しておこう。
+
+[source, console]
+----
+$ cd (Assingmentのルートディレクトリ） # <1>
+$ git status # <2>
+
+
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.adoc
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add README.adoc # <3>
+（出力略）
+$ git status # <4>
+（出力略）
+$ git commit -m "check codes directory and so on." # <5>
+
+----
+<1> 現在のディレクトリがこのAssignmentのルートディレクトリでない場合は、移動する。
+<2> `README.adoc` が更新されていることを確認した。
+<3> `README.adoc` を更新対象としてステージに追加した。
+<4> `README.adoc` を更新対象としてステージに追加できているか確認する。
+<5> Git の `commit` コマンドを実行して、作業履歴をコミットした。
+
+Gitのコミットコマンドの使い方は、Boxに置いてある `github-git-cheat-sheet.pdf` を参照しましょう。
+
+
+== 演習用ディレクトリを作成する
+
+次の手順で、演習プログラムのソースコードを置くディレクトリ（ `codes` ディレクトリ）に、 `com/craftinginterpreters/lox` ディレクトリ階層を作成します。
+
+. 自分が開発に使うターミナルで `codes` ディレクトリを開く（または現在のディレクトリをそこに移動する）。
+. （Javaなので）パッケージ構造に合わせてディレクトリ階層を作成する。 +
+[source,console]
+----
+$ pwd # <1>
+（Lox01をcloneしたディレクトリの）/lox01/codes
+$ mkdir com
+$ mkdir com/craftinginterpreters # <2>
+$ mkdir com/craftinginterpreters/lox # <2>
+----
+<1> `pwd` コマンドを使って、現在のディレクトリが `codes` ディレクトリであることを確認した。
+<2> パッケージ階層に合わせて、ディレクトリを作成した。
+
+NOTE: ディレクトリ区切り文字は、コマンドプロンプトではスラッシュ `/` ではなくバックスラッシュ `\` あるいは日本語フォントだと半角の￥マークになる。
+
+[NOTE]
+--
+ときに、ターミナルからディレクトリを作ろうとしても「権限がなくて作れない」と言われることがある。
+そのような場合は、Windows エクスプローラーを使ってフォルダとして作成する。
+--
+
+== 演習コードを作成する
+
+. テキストエディタで、上記で作成した `com/craftinginterpreters/lox` ディレクトリに `Lox.java` を作成する。
+** VS Codeなら、「フォルダーを開く」で、 `com/craftinginterpreters/lox` ディレクトリを開いておくとよいだろう。
+. テキストの「4.1」を参照して、最初のプログラムを実装する。
+. 作成したら、実行してみる（まだなにかできるわけではないけど）
+** コンパイルエラーがあれば、取り除いておく。
+
+== 変更をコミット（commit）する
+
+Gitの `commit` コマンドを使って、作成作業を、リポジトリに記録しておく。
+
+[source,console]
+----
+$ git status # <1>
+（出力略）
+$ git add Lox.java # <2>
+$ git status # <3>
+$ git commit -m "first ver. of Lox class."
+
+----
+<1> 変更点を確認する。作成したファイルがステージにないことがわかった。
+<2> 変更対象ファイル（おそらく `Lox.java` ）を、ステージに追加した。
+<3> もう一度Statusを確認して、ステージに追加できていることを確認した。
+<4> コミットした。
+
+
+WARNING: コミットは、ファイルではなく、リポジトリに対して実行することに注意（現在のディレクトリだけでなく、リポジトリ全体が処理の対象になる）。
+
+IMPORTANT: gitでコミットするときに起動されるエディタは、 git for Windoesのインストール時に指定したエディタか、未設定なら vim というUnix由来のエディタ。使い方を覚えるか、gitから起動されるエディタの設定を VS Code など自分がつかうエディタに変更する。
+
+== コミットをプッシュ（push）する
+
+コミットした段階では、まだローカル（自分のPC）のリポジトリに更新情報が反映された段階で、まだ、GitHub上のみなさんのリポジトリには反映されていません。
+
+そこで、ここまでの作業結果を反映するために、プッシュします。
+
+[source,console]
+----
+$ git status # <1>
+
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+$ git push # <2>
+----
+<1> コミットが完了できているか確認する（まだなら、先にコミットする）。
+<2> プッシュを実行した。GitHub上（リモートの）リポジトリとの間にコンフリクトがなければ、ローカルの内容がリモートへ反映される。
+
+* pushの際に、ユーザー名をきかれたら、GitHubアカウント名を入力する。
+* パスワードには、作成しておいたパーソナルアクセストークンを入力する（gitアカウントのパスワードではない）。
+
+NOTE: プッシュでは、ローカル（自分のPC）に溜まった複数のコミットを、リモート（GitHubのサーバー）へ転送し、リモートのリポジトリを更新する。最後にプッシュして以降のコミットがまとめて送り出されるので、必ずしもコミットごにプッシュする必要はない。まめにコミットし、動作確認等を実施して一段落したらプッシュするのがよいだろう。
